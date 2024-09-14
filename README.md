@@ -1,5 +1,12 @@
 # INTEGRATED STUDENT RESULT MANAGER
-# Error: ModuleNotFoundError: No module named 'xlwt'
+The project was initiated by Joseph O. Dada and and developed by his team. The team consists the following members:
+1. Joseph O. Dada - Lecturer and Team Leader
+2. O. Omitola - Lecturer and Co-Supervisor
+3. K. Adeniyi - Lecturer and Co-Supervisor
+4. Miss Akintan Oluwamodupe Esther  - Student
+5. Ozoadibe Temple Chidebu - Student
+
+The aim of the project is to develop a management system capable of processing and managing the results of students in many universities. This prototype used ABUAD as a case study. 
 
 Command:
 
