@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Broadsheet | ISRM {% endblock title %}
+
+{% block side_bar %}
+    {% include 'partial_active_element.html' with active='Broadsheet' %}
+{% endblock side_bar %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+ <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
+	<!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+            <h6 class="mb-2 mb-sm-0 pt-1">
+                <a href="/">Home Page</a>
+                     <span>/</span>
+                     <span>Broadsheet</span>
+            </h6>
+        </div>
+
+    </div>
+	<!-- Heading -->
+
+	<!-- Editable table -->
+	<form method="post" action="">{% csrf_token %}
+	<div class="card">
+	<h6 class="card-header text-center font-weight-bold text-uppercase py-4">{{ current_semester }} Semester - {{ current_session }}</h6>
+		<div class="container">
+		  <div class="row">
+		    <div class="col-md-5">
+		    	<a class="white-text" target="_blank" href="{% url 'print_broadsheet' id=level %}">
+		    <span data-toggle="tooltip" title="Print Broadsheet" class="btn btn-default w-26 p-3 float-left">
+		    		EXCEL
+		    	</span></a>
+		    </div>
+		    <div class="col-md-3"><strong>{{ level }}</strong></div>
+		    <div class="col-md-4">
+		    	<div class="dropdown">
+	    			<button class="btn btn-info dropdown-toggle float-right" type="button" id="dropdownMenu3" data-toggle="dropdown"
+		    			aria-haspopup="true" aria-expanded="false">
+		    			{{ level }}
+		    		</button>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+	    				<h6 class="dropdown-header">Select Level</h6>
+	    					{% for level in levels %}
+	    				<a data-toggle="tooltip" title="{{ level }}" class="dropdown-item" href="{% url 'broadsheet_for' level %}">
+	    					{{ level }}
+	    				</a>
+	    					{% endfor %}
+					</div>
+
+				</div>
+			</div>
+		  </div>
+		</div>
+	
+
+
+	  <div class="card-body">
+	    <div id="table" class="table-editable">
+
+	      <table class="table table-bordered table-responsive-md table-striped text-center">
+			<tr>
+				<th class="text-center"></th>
+				<th class="text-center"></th>
+				<th class="text-center"></th>
+			  {% for course in courses %}
+				<th class="text-center"> </th>
+			  {% endfor %}
+				<th class="text-center" colspan=4>Current</th>
+				<th class="text-center" colspan=4>Previous</th>
+				<th class="text-center" colspan=4>Cumulative</th>
+				<th class="text-center"></th>
+			</tr>
+			<tr>
+				<th class="text-center">S/N</th>
+				<th class="text-center">Matric. No.</th>
+				<th class="text-center">Name</th>
+			  {% for course in courses %}
+				<th class="verticalTableHeader"><span>{{ course.course.courseCode }}</span></th>
+			  {% endfor %}
+				<th class="text-center">TUT</th>
+				<th class="text-center">TUP</th>
+				<th class="text-center">WA</th>
+				<th class="text-center">GPA</th>
+				<th class="text-center">CTU</th>
+				<th class="text-center">CTU</th>
+				<th class="text-center">CWA</th>
+				<th class="text-center">CGP</th>
+				<th class="text-center">CTU</th>
+				<th class="text-center">CTU</th>
+				<th class="text-center">CWA</th>
+				<th class="text-center">CGP</th>
+				<th class="text-center">REMARK</th>
+			</tr>
+			<tr>
+				<th class="text-center"></th>
+				<th class="text-center"></th>
+				<th class="text-center"></th>
+			  {% for course in courses %}
+				<th class="text-center">{{ course.course.courseUnit }}</th>
+			  {% endfor %}
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+				<th class="text-center"> </th>
+			</tr>
+	        {% for student in students %}
+	        <tr>
+			  <th scope="row">{{ forloop.counter }}</th>
+	          <td class="pt-3-half" name="{{ student.matric }}" contenteditable="false">
+	          		{{ student.id_number }}
+	          </td>
+	          <td class="pt-3-half" contenteditable="false">
+				{{ student.user.last_name }} {{ student.user.first_name }}
+			  </td>
+			  {% for course in courses %}
+				<td class="pt-3-half" contenteditable="false">{{ course.total }}</td>
+			  {% endfor %}
+	          <td class="pt-3-half" contenteditable="false">{{ total_unit_in_semester }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ total_unit_points }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ gp }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ gpa }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ previousUnit }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ previousUP }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ previousWA }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ previousCGPA }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ total_unit }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ total_unit_points }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ cumulativeWA }}</td>
+	          <td class="pt-3-half" contenteditable="false">{{ cgpa }}</td>
+	        </tr>
+	        {% endfor %}
+	      </table>
+	    </div>
+	  </div>
+	</div>
+</form>
+	<!-- Editable table -->
+	<br>
+	<br>
+
+</div>
+<script src="{% static 'js/disable_input_score.js' %}"></script>
+{% endblock %}
