@@ -1,10 +1,10 @@
 # INTEGRATED STUDENT RESULT MANAGER
 This project was initiated by Joseph O. Dada and and developed by his team. The team consists of the following members:
-1. Joseph O. Dada - Lecturer and Team Leader
-2. O. Omitola - Lecturer and Co-Supervisor
-3. K. Adeniji - Lecturer and Co-Supervisor
+1. Dr. Joseph O. Dada - Senior Researcher & Team Leader
+2. Dr. O. Omitola - Researcher
+3. Engr. K. Adeniji - Researcher
 4. Miss Akintan Oluwamodupe Esther  - Student
-5. Ozoadibe Temple Chidebu - Student
+5. Mr. Ozoadibe Temple Chidebu - Student
 
 The aim of the project is to develop a results management system capable of processing and managing the results of students in many universities. This prototype used ABUAD as a case study. 
 
